@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+/**
+ * PASO 16: Función de promocionar o recuperar
+ *
+ * SIRVE PARA: decidir el resultado final combinando dos condiciones.
+ * USA:        boolean con nombre descriptivo (promociona), operador && (ambas
+ *             condiciones deben cumplirse), operador ternario para el mensaje.
+ *             Aquí se piden la media y la nota mínima directamente para probar
+ *             solo la condición.
+ * PRUEBA:     media 5.83, mínima 3.5 -> Recupera  (el caso típico de examen)
+ *             media 5.0,  mínima 5.0 -> Promociona
+ *             media 7.97, mínima 3.9 -> Recupera
+ *             media 4.0,  mínima 4.0 -> Recupera  (media por debajo de 5)
+ */
+public class Paso16Promocion {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        final int APROBADO = 5;
+        final double NOTA_MINIMA_PROMOCION = 4.0;
+
+        System.out.println("Media del alumno: ");
+        double media = scanner.nextDouble();
+        System.out.println("Nota mas baja del alumno: ");
+        double notaMinima = scanner.nextDouble();
+
+        boolean promociona = media >= APROBADO && notaMinima >= NOTA_MINIMA_PROMOCION;
+        System.out.println(promociona ? "Promociona" : "Recupera");
+
+        scanner.close();
+    }
+}

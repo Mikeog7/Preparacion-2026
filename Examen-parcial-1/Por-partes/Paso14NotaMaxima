@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+/**
+ * PASO 14: Nota más alta
+ *
+ * SIRVE PARA: encontrar el valor mayor de una serie de notas.
+ * USA:        variable de estado notaMaxima inicializada con el valor MÁS BAJO
+ *             posible (NOTA_MINIMA), para que cualquier nota real la supere;
+ *             if dentro del for que la reemplaza.
+ * PRUEBA:     notas 6, 3.5, 8 -> 8.0.  Todas iguales (5, 5) -> 5.0.
+ */
+public class Paso14NotaMaxima {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        final double NOTA_MINIMA = 0.0;
+
+        System.out.println("En cuantas asignaturas estas matriculado (1-10): ");
+        int matriculas = scanner.nextInt();
+
+        double notaMaxima = NOTA_MINIMA;
+
+        for (int asignatura = 1; asignatura <= matriculas; asignatura++) {
+            System.out.println("Nota de la asignatura " + asignatura + ": ");
+            double notaAsignatura = scanner.nextDouble();
+            if (notaAsignatura > notaMaxima) {
+                notaMaxima = notaAsignatura;
+            }
+        }
+
+        System.out.println("La nota mas alta es: " + notaMaxima);
+
+        scanner.close();
+    }
+}
