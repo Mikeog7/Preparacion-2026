@@ -1,26 +1,41 @@
 import java.util.Scanner;
 
 /**
- * PASO 12: Mostrar asignaturas suspensas
+ * PASO 13: Verificar que la nota esté dentro del rango
  *
- * SIRVE PARA: obtener las suspensas a partir de datos que ya se tienen.
- * USA:        una resta: suspensas = matriculas - aprobadas. Si un dato se puede
- *             CALCULAR, no se cuenta aparte (menos código, menos errores).
- *             Aquí se piden los dos datos directamente para probar solo este paso.
- * PRUEBA:     matriculas 5, aprobadas 3 -> suspensas 2.
+ * SIRVE PARA: no aceptar notas fuera de 0-10. En el examen completo va DENTRO
+ *             del for y ANTES de los cálculos, para no sumar notas inválidas.
+ * USA:        do-while (la nota se pide al menos una vez y la lectura se escribe
+ *             una sola vez), variable de estado boolean (notaValida), operador
+ *             && (Y), operador ! (NO): "!notaValida" = "la nota NO es válida".
+ * PRUEBA:     -1, 11, 7 -> rechaza -1 y 11, acepta 7.
+ *             Límites: 0 y 10 se aceptan; -0.1 y 10.1 se rechazan.
  */
-public class Paso12Suspensas {
+public class Paso13ValidarNotas {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        final double NOTA_MINIMA = 0.0;
+        final double NOTA_MAXIMA = 10.0;
 
-        System.out.println("Total de asignaturas: ");
+        System.out.println("En cuantas asignaturas estas matriculado (1-10): ");
         int matriculas = scanner.nextInt();
-        System.out.println("Asignaturas aprobadas: ");
-        int aprobadas = scanner.nextInt();
 
-        int suspensas = matriculas - aprobadas;
-        System.out.println("Asignaturas suspensas: " + suspensas);
+        for (int asignatura = 1; asignatura <= matriculas; asignatura++) {
+            double notaAsignatura;
+            boolean notaValida = false;
+
+            do {
+                System.out.println("Nota de la asignatura " + asignatura + ": ");
+                notaAsignatura = scanner.nextDouble();
+                notaValida = notaAsignatura >= NOTA_MINIMA && notaAsignatura <= NOTA_MAXIMA;
+                if (!notaValida) {
+                    System.out.println("No es valido, vuelve a intentar.");
+                }
+            } while (!notaValida);
+
+            System.out.println("Nota aceptada: " + notaAsignatura);
+        }
 
         scanner.close();
     }
